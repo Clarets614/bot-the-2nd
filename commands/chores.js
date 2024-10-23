@@ -1,6 +1,7 @@
 module.exports = {
     name: 'chores',
     description: 'What chores do we need to get done today?',
+
     execute(message){
         switch(new Date().getDay()){
             case 0:

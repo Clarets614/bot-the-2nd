@@ -61,7 +61,13 @@ client.on('messageCreate', message => {
 
         const command = commands.get(commandName);
         if (command) {
-            command.execute(message, args, commands);
+            try {
+                command.execute(message, args, commands);
+            } catch (error) {
+                console.error(`Error occured while executing command: ${commandName}`, error);
+                message.channel.send('There was an error with the requested command and it couldn\'t complete. Please check the help list or alert the creator of this bot');
+            }
+
 
         }
     }

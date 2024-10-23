@@ -22,12 +22,12 @@ module.exports = {
             const windSpeed = weatherData.wind.speed;
 
             message.channel.send(
-                `Happy to send you the weather in ${city.toUpperCase()}! \n` +
+                `Requested City: ${city.toUpperCase()} \n` +
                 `Temperature: ${temp} degrees \n` +
                 `Feels Like: ${feelsLike} degrees \n` +
                 `Description: ${description} \n` +
                 `Humidity: ${humidity} % \n` +
-                `Wind Speed: ${windSpeed} mph \n`
+                `Wind Speed: ${Math.trunc(windSpeed)} mph`
             );
         } catch (error){
             console.error(error);
