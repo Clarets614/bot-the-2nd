@@ -3,7 +3,11 @@ module.exports = {
     description: 'What chores do we need to get done today?',
 
     execute(message){
-        switch(new Date().getDay()){
+        const localTime = new Date();
+
+        const dayOfWeek = localTime.getDay();
+        let day;
+        switch(dayOfWeek){
             case 0:
             day = "Sunday: Time to plan out a couple dinners for the week and shop for groceries needed. Don't forget to look at the calendar for upcoming events!";
             break;

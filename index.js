@@ -7,6 +7,7 @@ const fs = require('fs');  //sets up file system node so that commands folder is
 require('dotenv').config(); //sets up dotenv so that tokens and keys are private
 
 const Discord = require('discord.js'); //importing discord.js
+const { channel } = require('diagnostics_channel');
 
 const client = new Discord.Client({
     intents: [
@@ -44,6 +45,10 @@ const weatherAPI = process.env.WEATHER_KEY;
 //initialization feedback so that I can tell the bot is ready
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    client.channels.fetch('1041490987001852019')
+    .then(channel => {
+        channel.send("Artemis online")
+    })
 });
 
 client.on('messageCreate', message => {
@@ -65,7 +70,7 @@ client.on('messageCreate', message => {
                 command.execute(message, args, commands);
             } catch (error) {
                 console.error(`Error occured while executing command: ${commandName}`, error);
-                message.channel.send('There was an error with the requested command and it couldn\'t complete. Please check the help list or alert the creator of this bot');
+                message.channel.send('The dev fucked it up. Go tell Artemis shit\'s broke');
             }
 
 
@@ -76,6 +81,13 @@ client.on('messageCreate', message => {
 }
 
 );
+
+process.on('exit', (code)=> {
+    const channel = client.channels.cache.get('1041490987001852019');
+    if(channel){
+        channel.send('ArtemisBot is logging out. See ya around!');
+    }
+})
 
 //this line needs to stay at the very end
 client.login(token);
